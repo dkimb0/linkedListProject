@@ -65,10 +65,12 @@ class LinkedList {
 
     }
 
+    // returns the first node in the list
     getHead(){
         return this.head;
     }
 
+    // returns last node in the list
     getTail(){
         let tmp = this.head;
         while (tmp.nextNode != null){
@@ -77,6 +79,7 @@ class LinkedList {
         return tmp;
     }
 
+    // returns node at given index
     at(index){
         let tmp = this.head;
         for (let i = 1; i < index; i++){
@@ -85,6 +88,63 @@ class LinkedList {
         return tmp;
     }
 
+    // removes last element from the list
+    pop(){
+        // get second to last element, set nextNode to null, cutting tie with old tail
+        this.at(this.size() - 1).nextNode = null;        
+    }
+
+    //returns true if passed in value is in the list and false if not
+    contains(value){
+        let tmp = this.head;
+        // traverse
+        while (tmp != null){
+            //if there is a match at any point, return true and exit
+            if (value === tmp.value){
+                return true;
+            }
+            // if not yet a match, try next node
+            tmp = tmp.nextNode;
+        }
+
+        
+        // if no match is found the whole time, return false
+        return false;
+    }
+
+    // returns index of node containing value, null if not found
+    find(value){
+        let tmp = this.head;
+        let counter = 1;
+        while (tmp != null){
+            if(value === tmp.value){
+                return counter;
+            }
+
+            counter += 1;
+            tmp = tmp.nextNode;
+        }
+
+        return null;
+    }
+
+    // returns LL obj as strings in format:
+    //( value ) -> ( value ) -> ( value ) -> null
+    toString(){
+        let str = '';
+        let tmp = this.head;
+        while(tmp != null){
+            str = str.concat(`( ${tmp.value} ) -> `);
+            tmp = tmp.nextNode;
+        }
+        str = str.concat('null');
+
+        return str;
+    }
+
+    insertAt(value, index){
+        
+    }
     
 }
 
@@ -109,6 +169,13 @@ newList.prepend('first prepend');
 // console.log(newList.size());
 // console.log(newList.getHead());
 // console.log(newList.getTail());
-console.log(newList.at(1));
-console.log(newList.at(2));
-console.log(newList.at(3));
+// console.log(newList.at(1));
+// console.log(newList.at(2));
+// console.log(newList.at(3));
+// newList.pop();
+// console.log(newList.contains('first prepend'));
+// console.log(newList.find('first prepend'));
+// console.log(newList.find('first append'));
+// console.log(newList.find('second append'));
+// console.log(newList.find('what'))
+console.log(newList.toString());
