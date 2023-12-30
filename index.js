@@ -147,20 +147,40 @@ class LinkedList {
         let newNode = new Node;
         newNode.value = value;
 
+        if (index === 1){
+            newNode.nextNode = this.head;
+            this.head = newNode;
+        }else{
+            // at ( index - 1 ), save nextNode to tmp
+            // save the node at which we are trying to insert
+            // so that when we set the index-1 nextNode, it doesnt get lost
+            let tmp = this.at(index);
 
-        // at ( index - 1 ), save nextNode to tmp
-        // save the node at which we are trying to insert
-        // so that when we set the index-1 nextNode, it doesnt get lost
-        let tmp = this.at(index);
+            // setting the index before to point to new node
+            this.at(index-1).nextNode = newNode;
 
-        // setting the index before to point to new node
-        this.at(index-1).nextNode = newNode;
+            // set new node's nextNode to tmp
+            newNode.nextNode = tmp;
 
-        // set new node's nextNode to tmp
-        newNode.nextNode = tmp;
+        }
+
 
         return newNode;
+    }
 
+    removeAt(index){
+        let tmp = this.at(index);
+
+        if (index === 1){
+            this.head = this.at(index + 1);
+        }else{
+            this.at(index - 1).nextNode = this.at(index).nextNode;
+        }
+
+
+
+
+        return tmp;
     }
     
 }
@@ -200,4 +220,12 @@ console.log(newList.toString());
 newList.insertAt('insert 2', 2);
 console.log(newList.toString());
 newList.insertAt('insert 4', 4);
+console.log(newList.toString());
+newList.removeAt(3);
+console.log(newList.toString());
+newList.removeAt(1);
+console.log(newList.toString());
+newList.removeAt(1);
+console.log(newList.toString());
+newList.insertAt('insert 1', 1);
 console.log(newList.toString());
