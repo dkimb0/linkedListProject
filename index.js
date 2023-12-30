@@ -143,7 +143,24 @@ class LinkedList {
     }
 
     insertAt(value, index){
-        
+        // create new node
+        let newNode = new Node;
+        newNode.value = value;
+
+
+        // at ( index - 1 ), save nextNode to tmp
+        // save the node at which we are trying to insert
+        // so that when we set the index-1 nextNode, it doesnt get lost
+        let tmp = this.at(index);
+
+        // setting the index before to point to new node
+        this.at(index-1).nextNode = newNode;
+
+        // set new node's nextNode to tmp
+        newNode.nextNode = tmp;
+
+        return newNode;
+
     }
     
 }
@@ -178,4 +195,9 @@ newList.prepend('first prepend');
 // console.log(newList.find('first append'));
 // console.log(newList.find('second append'));
 // console.log(newList.find('what'))
+// console.log(newList.toString());
+console.log(newList.toString());
+newList.insertAt('insert 2', 2);
+console.log(newList.toString());
+newList.insertAt('insert 4', 4);
 console.log(newList.toString());
